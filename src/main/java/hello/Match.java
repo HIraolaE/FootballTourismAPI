@@ -38,5 +38,16 @@ public class Match {
     public Date getDate() {
         return date;
     }
+    
+    @Override
+    public String toString() {
+    	
+    	StringBuilder retVal = new StringBuilder();
+    	retVal.append(date.toString());
+    	retVal.append("\t" + localTeam);
+    	retVal.append("\t" + awayTeam);
+    	retVal.append("\t" + stadium);
+    	return retVal.toString();
+    }
 
 }
