@@ -47,10 +47,15 @@ public class MatchMongoClient {
 			BasicDBObject homeTeam = (BasicDBObject)teams.get("home");
 			BasicDBObject awayTeam = (BasicDBObject)teams.get("away");
 			BasicDBObject venue = (BasicDBObject)fixture.get("venue");
+			BasicDBObject location = (BasicDBObject)fixture.get("location");
 			Calendar calendar = Calendar.getInstance();
 			BasicDBObject startTime = (BasicDBObject)fixture.get("start");
 			calendar.setTimeInMillis(Long.parseLong(startTime.getString("timestamp").toString()));
-			Match match = new Match(id, getTeamName(homeTeam), getTeamName(awayTeam), venue.get("name").toString(), calendar.getTime());
+			//LocationRetriever lr = new LocationRetriever((String)venue.get("name"));
+			Match match = new Match(id, getTeamName(homeTeam), getTeamName(awayTeam), 
+					venue.get("name").toString(),calendar.getTime(), 
+					toDouble(location.get("lon")),toDouble(location.get("lat")));
+					//lr.getLatitude(), lr.getLongitude());
 			retVal.add(match);
 		
 		}
@@ -63,6 +68,15 @@ public class MatchMongoClient {
 		String retVal = "";
 		BasicDBObject teamName = (BasicDBObject)team.get("name");
 		retVal = teamName.get("full").toString();
+		return retVal;
+		
+	}
+	
+	private double toDouble(Object object) {
+
+		double retVal = 0;
+		String coordAsString = object.toString();
+		retVal = Double.parseDouble(coordAsString);
 		return retVal;
 		
 	}

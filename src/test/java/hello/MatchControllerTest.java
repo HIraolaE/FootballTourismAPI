@@ -1,5 +1,6 @@
 package hello;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
@@ -19,7 +20,10 @@ public class MatchControllerTest {
 	@Test
 	public void testMatch() {
 		
-		Match[] matches = matchController.match(new Date().toString());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String stringDate = formatter.format(new Date());
+		Match[] matches = matchController.match(stringDate,
+				stringDate, new String("London"));
 		for(Match match: matches)
 			System.out.println(match);
 		

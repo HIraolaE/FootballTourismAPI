@@ -9,17 +9,30 @@ public class Match {
     private final String awayTeam;
     private final String stadium;
     private final Date date;
+	private final double longitude;
+	private final double latitude;
 	 
 
-    public Match(long id, String localTeam, String awayTeam, String stadium, Date date) {
+    public Match(long id, String localTeam, String awayTeam, String stadium, 
+    		Date date, double longitude, double latitude) {
         this.id = id;
         this.localTeam = localTeam;
         this.awayTeam = awayTeam;
         this.stadium = stadium;
         this.date = date;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
-    public long getId() {
+    public double getLongitude() {
+		return longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public long getId() {
         return id;
     }
 
